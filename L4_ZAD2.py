@@ -7,13 +7,23 @@ from L4_ZAD1 import QueueBaB, QueueBaE
 
 def comparing(a, b):
     start_a = time.time()
-    a.enqueue(i for i in range(1, 1000))
-    a.dequeue()
+    for i in range(1, 1000):
+        a.enqueue("a")
+        a.enqueue("b")
+        a.enqueue("r")
+        a.dequeue()
+        a.is_empty()
+        a.size()
     end_a = time.time()
     time_bab = end_a-start_a
     start_b = time.time()
-    b.enqueue(i for i in range(1, 1000))
-    b.dequeue()
+    for i in range(1, 1000):
+        b.enqueue("a")
+        b.enqueue("b")
+        b.enqueue("r")
+        b.dequeue()
+        b.is_empty()
+        b.size()
     end_b = time.time()
     time_bae = end_b-start_b
     return time_bab, time_bae
