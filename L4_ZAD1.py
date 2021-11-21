@@ -13,7 +13,7 @@ class QueueBaB(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items.insert(0, item)
+        self.list_of_items = self.list_of_items + [item]
 
     def dequeue(self):
         """
@@ -21,7 +21,6 @@ class QueueBaB(object):
         Nie pobiera argumentów.
         Zwraca ściągnięty obiekt.
         """
-        self.list_of_items.reverse()
         return self.list_of_items.pop(0)
 
     def is_empty(self):
@@ -56,7 +55,7 @@ class QueueBaE(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items.insert(0, item)
+        self.list_of_items = [item] + self.list_of_items
 
     def dequeue(self):
         """
