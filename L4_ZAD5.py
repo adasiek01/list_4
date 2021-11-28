@@ -72,11 +72,15 @@ class UnorderedList(object):
         Niczego nie zwraca.
         """
         current = self.head
-        if current.get_next() == None:
-            current.get_data.reverse()
-        self.head.set_next(item)
-        current.get_data.reverse()
+        last = False
 
+        while last == False:
+            if current.get_next() == None:
+                last = True
+            else:
+                current = current.get_next()
+        new_item = Node(item)
+        current.set_next(new_item)
 
 
     def index(self, item):
@@ -89,6 +93,14 @@ class UnorderedList(object):
         Zwraca pozycję elementu na liście lub None w przypadku,
         gdy wskazanego elementu na liście nie ma.
         """
+        current = self.head
+        ind = 0
+        while current.get_data() != item:
+            ind += 1
+            current = current.get_next()
+        else:
+            return ind
+
 
     def insert(self, pos, item):
         """
@@ -100,6 +112,15 @@ class UnorderedList(object):
         gdy nie jest możliwe umieszczenie elementu
         na zadanej pozycji (np. na 5. miejsce w 3-elementowej liście).
         """
+        current = self.head
+        for i in range(1, pos):
+            current = current.get_next()
+            #if current.get_next() == current:
+                #return IndexError
+        new_item = Node(item)
+        next = current.get_next()
+        current.set_next(new_item)
+        new_item.set_next(next)
 
     def pop(self, pos=-1):
         """
@@ -111,6 +132,13 @@ class UnorderedList(object):
         Zwraca wartość usuniętego elementu.
         Rzuca wyjątkiem IndexError w przypadku,
         gdy usunięcie elementu z danej pozycji jest niemożliwe."""
+        current = self.head
+        for i in range(1, pos):
+            current = current.get_next()
+        to_remove = current.get_next()
+        next = to_remove.get_next()
+        current.set_next(next)
+
 
     def __str__(self):
         current = self.head
@@ -126,5 +154,7 @@ if __name__ == "__main__":
     mylist = UnorderedList()
     mylist.add(5)
     mylist.add(8)
-    mylist.append(5)
+    mylist.add(6)
+    mylist.append(9)
+    mylist.insert(2, 8)
     print(mylist)
