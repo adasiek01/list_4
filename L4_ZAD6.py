@@ -163,7 +163,7 @@ class StackUsingUL(object):
         Nie pobiera argumentów.
         Zwraca True lub False.
         """
-        return self.items == None
+        return self.items.is_empty()
 
     def push(self, item):
         """
@@ -171,6 +171,7 @@ class StackUsingUL(object):
         Pobiera element, który ma zostać umieszczony.
         Niczego nie zwraca.
         """
+        self.items.append(item)
 
 
     def pop(self):
@@ -180,6 +181,7 @@ class StackUsingUL(object):
         Zwraca ściągnięty element.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
+        return self.items.pop()
 
     def peek(self):
         """
@@ -189,6 +191,7 @@ class StackUsingUL(object):
         Zwraca wierzchni element stosu.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
+        return self.items.search(-1)
 
     def size(self):
         """
@@ -196,3 +199,19 @@ class StackUsingUL(object):
         Nie pobiera argumentów.
         Zwraca liczbę elementów na stosie.
         """
+        return self.items.size()
+
+    def __str__(self):
+        current = self.items
+        li = []
+        while current != None:
+            li.append(current.get_data())
+            current = current.get_next()
+        s = ("elements in the list are [" + ', '.join(['{}'] * len(li)) + "]")
+        return s.format(*li)
+
+
+if __name__ == "__main__":
+    mylist = StackUsingUL()
+    print(mylist.is_empty())
+    print(mylist.size())
