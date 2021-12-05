@@ -123,16 +123,17 @@ class UnorderedList(object):
         length = self.size()
         if pos > length:
             raise IndexError("ERROR")
-      
-        
-        for i in range(0, pos-1):
-            current = current.get_next()
-            #if current.get_next() == current:
-                #return IndexError
-        new_item = Node(item)
-        next = current.get_next()
-        current.set_next(new_item)
-        new_item.set_next(next)
+        if pos == 0:
+            self.add(item)
+        else:
+            for i in range(0, pos-1):
+                current = current.get_next()
+                #if current.get_next() == current:
+                    #return IndexError
+            new_item = Node(item)
+            next = current.get_next()
+            current.set_next(new_item)
+            new_item.set_next(next)
 
     def pop(self, pos=-1):
         """
@@ -159,11 +160,10 @@ class UnorderedList(object):
         length = self.size()
 
         if self.is_empty():
-            print("List already empty")
             return 
 
         elif pos>length-1:
-            print("Too large index")
+            raise IndexError("Too large index")
             return
 
         if pos == -1:
@@ -198,7 +198,7 @@ if __name__ == "__main__":
     mylist.append(4)
     mylist.add(7)
     mylist.append(15)
-    mylist.insert(2, 9)
+    mylist.insert(0, 100)
     print(mylist)
     mylist.pop()
     print(mylist)
