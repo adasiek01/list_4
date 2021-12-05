@@ -1,3 +1,6 @@
+from enum import unique
+
+
 class Node:
 
     def __init__(self, init_data):
@@ -82,6 +85,8 @@ class UnorderedList(object):
         new_item = Node(item)
         current.set_next(new_item)
 
+        adam = current.get_next()
+        adam.set_next(None)
 
     def index(self, item):
         """
@@ -95,11 +100,13 @@ class UnorderedList(object):
         """
         current = self.head
         ind = 0
-        while current.get_data() != item:
-            ind += 1
-            current = current.get_next()
-        else:
-            return ind
+        length = self.size()
+        while current != None:
+            if current.get_data() != item:
+                ind+=1
+                current = current.get_next()
+            else:
+                return ind
 
 
     def insert(self, pos, item):
@@ -113,7 +120,12 @@ class UnorderedList(object):
         na zadanej pozycji (np. na 5. miejsce w 3-elementowej liście).
         """
         current = self.head
-        for i in range(1, pos):
+        length = self.size()
+        if pos > length:
+            raise IndexError("ERROR")
+      
+        
+        for i in range(0, pos-1):
             current = current.get_next()
             #if current.get_next() == current:
                 #return IndexError
@@ -132,13 +144,40 @@ class UnorderedList(object):
         Zwraca wartość usuniętego elementu.
         Rzuca wyjątkiem IndexError w przypadku,
         gdy usunięcie elementu z danej pozycji jest niemożliwe."""
+
+        """
         current = self.head
         for i in range(1, pos):
             current = current.get_next()
         to_remove = current.get_next()
         next = to_remove.get_next()
         current.set_next(next)
+"""
+        current = self.head
+        previous = None
+        found = False
+        length = self.size()
 
+        if self.is_empty():
+            print("List already empty")
+            return 
+
+        elif pos>length-1:
+            print("Too large index")
+            return
+
+        if pos == -1:
+            length = self.size()
+            pos = length-1
+
+        for i in range(0, pos):
+            previous = current
+            current = current.get_next()
+
+        if previous == None:                  #jeśli usuwamy pierwszy element
+            self.head = current.get_next()
+        else:
+            previous.set_next(current.get_next())
 
     def __str__(self):
         current = self.head
@@ -156,5 +195,14 @@ if __name__ == "__main__":
     mylist.add(8)
     mylist.add(6)
     mylist.append(9)
-    mylist.insert(2, 8)
+    mylist.append(4)
+    mylist.add(7)
+    mylist.append(15)
+    mylist.insert(2, 9)
     print(mylist)
+    mylist.pop()
+    print(mylist)
+    """newlist=UnorderedList()
+    newlist.add(7)
+    newlist.pop(0)
+    #print(mylist)"""
