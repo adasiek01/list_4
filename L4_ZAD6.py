@@ -22,6 +22,7 @@ class UnorderedList(object):
     Tutaj skopiuj swoją implementację klasy UnorderedList,
     wykonaną jako rezultat Zadania 5.
     """
+
     def __init__(self):
         self.head = None
 
@@ -68,6 +69,25 @@ class UnorderedList(object):
         else:
             previous.set_next(current.get_next())
 
+    def remove_2(self, item, start_place):
+        current = self.head
+        previous = None
+        found = False
+        position = 0
+
+        while not found:
+            if current.get_data() == item and position >= start_place:
+                found = True
+            else:
+                previous = current
+                current = current.get_next()
+                position += 1
+
+        if previous == None:  # jeśli usuwamy pierwszy element
+            self.head = current.get_next()
+        else:
+            previous.set_next(current.get_next())
+
     def append(self, item):
         """
         Metoda dodająca element na koniec listy.
@@ -77,6 +97,9 @@ class UnorderedList(object):
         current = self.head
         last = False
 
+        if self.is_empty() == True:
+            self.add(item)
+            return
         while last == False:
             if current.get_next() == None:
                 last = True
@@ -84,7 +107,6 @@ class UnorderedList(object):
                 current = current.get_next()
         new_item = Node(item)
         current.set_next(new_item)
-
 
     def index(self, item):
         """
@@ -104,7 +126,6 @@ class UnorderedList(object):
         else:
             return ind
 
-
     def insert(self, pos, item):
         """
         Metoda umieszcza na wskazanej pozycji zadany element.
@@ -118,8 +139,8 @@ class UnorderedList(object):
         current = self.head
         for i in range(1, pos):
             current = current.get_next()
-            #if current.get_next() == current:
-                #return IndexError
+            # if current.get_next() == current:
+            # return IndexError
         new_item = Node(item)
         next = current.get_next()
         current.set_next(new_item)
@@ -135,13 +156,17 @@ class UnorderedList(object):
         Zwraca wartość usuniętego elementu.
         Rzuca wyjątkiem IndexError w przypadku,
         gdy usunięcie elementu z danej pozycji jest niemożliwe."""
+
         current = self.head
+        if pos == -1:
+            while current.get_next() != None:
+                current = current.get_next()
+            removing = current.get_data()
+            self.remove_2(removing, self.size() - 1)
         for i in range(1, pos):
             current = current.get_next()
         to_remove = current.get_next()
-        next = to_remove.get_next()
-        current.set_next(next)
-
+        current.set_next(to_remove)
 
     def __str__(self):
         current = self.head
@@ -181,7 +206,7 @@ class StackUsingUL(object):
         Zwraca ściągnięty element.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        return self.items.pop()
+        self.items.pop()
 
     def peek(self):
         """
@@ -191,7 +216,10 @@ class StackUsingUL(object):
         Zwraca wierzchni element stosu.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        return self.items.search(-1)
+        current = self.items.head
+        while current.get_next() != None:
+            current = current.get_next()
+        return current.get_data()
 
     def size(self):
         """
@@ -202,7 +230,7 @@ class StackUsingUL(object):
         return self.items.size()
 
     def __str__(self):
-        current = self.items
+        current = self.items.head
         li = []
         while current != None:
             li.append(current.get_data())
@@ -213,5 +241,8 @@ class StackUsingUL(object):
 
 if __name__ == "__main__":
     mylist = StackUsingUL()
-    print(mylist.is_empty())
-    print(mylist.size())
+    mylist.push(4)
+    print(mylist.peek())
+    mylist.pop()
+    print(mylist)
+
