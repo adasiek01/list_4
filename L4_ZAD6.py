@@ -163,10 +163,18 @@ class UnorderedList(object):
                 current = current.get_next()
             removing = current.get_data()
             self.remove_2(removing, self.size() - 1)
-        for i in range(1, pos):
-            current = current.get_next()
-        to_remove = current.get_next()
-        current.set_next(to_remove)
+
+        elif self.is_empty():
+            return
+
+        elif pos > self.size() - 1:
+            raise IndexError("Too large index")
+
+        else:
+            for i in range(0, pos):
+                current = current.get_next()
+            to_remove = current.get_data()
+            self.remove_2(to_remove, pos)
 
     def __str__(self):
         current = self.head
