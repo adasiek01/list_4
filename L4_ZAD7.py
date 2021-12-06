@@ -1,3 +1,21 @@
+class Node:
+
+    def __init__(self, init_data):
+        self.data = init_data
+        self.next = None
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.next
+
+    def set_data(self, new_data):
+        self.data = new_data
+
+    def set_next(self, new_next):
+        self.next = new_next
+
 class UnorderedList(object):
     """
     Tutaj, skopiuj swoją implementację klasy UnorderedList,
@@ -143,10 +161,18 @@ class UnorderedList(object):
                 current = current.get_next()
             removing = current.get_data()
             self.remove_2(removing, self.size() - 1)
-        for i in range(1, pos):
-            current = current.get_next()
-        to_remove = current.get_next()
-        current.set_next(to_remove)
+
+        elif self.is_empty():
+            return
+
+        elif pos > self.size() - 1:
+            raise IndexError("Too large index")
+
+        else:
+            for i in range(0, pos):
+                current = current.get_next()
+            to_remove = current.get_data()
+            self.remove_2(to_remove, pos)
 
     def __str__(self):
         current = self.head
@@ -177,7 +203,7 @@ class DequeueUsingUL(object):
         Pobiera jako argument element, który ma zostać dodany.
         Niczego nie zwraca.
         """
-        self.items.insert(0, item)
+        self.items.add(item)
 
     def add_right(self, item):
         """
@@ -212,3 +238,20 @@ class DequeueUsingUL(object):
         Zwraca liczbę elementów na w kolejce.
         """
         return self.items.size()
+
+    def __str__(self):
+        current = self.items.head
+        li = []
+        while current != None:
+            li.append(current.get_data())
+            current = current.get_next()
+        s = ("elements in the list are [" + ', '.join(['{}'] * len(li)) + "]")
+        return s.format(*li)
+
+if __name__ == "__main__":
+    mylist = DequeueUsingUL()
+    mylist.add_right(4)
+    mylist.add_left(3)
+    print(mylist)
+    mylist.remove_right()
+    print(mylist)
