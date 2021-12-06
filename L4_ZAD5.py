@@ -156,16 +156,26 @@ class UnorderedList(object):
         Rzuca wyjątkiem IndexError w przypadku,
         gdy usunięcie elementu z danej pozycji jest niemożliwe."""
 
+
+
         current = self.head
         if pos == -1:
             while current.get_next() != None:
                 current = current.get_next()
             removing = current.get_data()
             self.remove_2(removing, self.size() - 1)
-        for i in range(1, pos):
-            current = current.get_next()
-        to_remove = current.get_next()
-        current.set_next(to_remove)
+
+        elif self.is_empty():
+            return
+
+        elif pos > self.size() - 1:
+            raise IndexError("Too large index")
+
+        else:
+            for i in range(0, pos):
+                current = current.get_next()
+            to_remove = current.get_data()
+            self.remove_2(to_remove, pos)
 
 
     def __str__(self):
@@ -183,8 +193,8 @@ if __name__ == "__main__":
     mylist.add(5)
     mylist.add(8)
     mylist.add(6)
-    mylist.add(9)
+    mylist.add(2)
     mylist.append(9)
     print(mylist)
-    mylist.pop()
+    mylist.pop(0)
     print(mylist)
