@@ -7,6 +7,12 @@ from L4_ZAD1 import QueueBaB, QueueBaE
 
 
 def comparing(n):
+    """
+    Funkcja porównuje czasy wykonanych operacji dla obu zaimplementowanych kolejek
+    Argument n - ilość operacji
+    Zwraca te czasy
+    """
+
     bab = QueueBaB()
     bae = QueueBaE()
     start_a = time.time()
