@@ -4,6 +4,7 @@ na linii startu zgodnie z wyliczanką "N" (n to dowolna liczba naturalna). Posta
 postacią "second".
 Za pomocą zapisanej poniżej funkcji sprawdzimy, czy dla danej wyliczanki marzenie postaci "first" się spełni. """
 
+
 class Queue:
     def __init__(self):
         self.items = []
@@ -19,6 +20,7 @@ class Queue:
 
     def size(self):
         return len(self.items)
+
 
 def counting_rhyme(names, n, first, second):
     """
@@ -46,9 +48,9 @@ def counting_rhyme(names, n, first, second):
     else: 
         return False, start_list
 
+
 if __name__ == "__main__":
-    
     participants = ['Shrek', 'Elsa', 'Mulan', 'Mushu', 'Osioł', 'Nemo', 'Król Julian', 'Fiona', 'Olaf', 'Mort' ]
-    for i in range(0,20):
-        print(counting_rhyme(participants,i, "Mulan", "Fiona"))
+    for i in range(0, 20):
+        print(counting_rhyme(participants, i, "Mulan", "Fiona"))
 
