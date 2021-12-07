@@ -1,8 +1,8 @@
 class QueueBaB(object):
     """
-    Klasa implementująca kolejkę za pomocą pythonowej listy tak,
-    że początek kolejki jest przechowywany na początku listy.
-    """
+       Klasa implementująca kolejkę za pomocą pythonowej listy tak,
+       że początek kolejki jest przechowywany na początku listy.
+       """
 
     def __init__(self):
         self.list_of_items = []
@@ -13,7 +13,7 @@ class QueueBaB(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items = self.list_of_items + [item]
+        self.list_of_items.append(item)
 
     def dequeue(self):
         """
@@ -21,7 +21,8 @@ class QueueBaB(object):
         Nie pobiera argumentów.
         Zwraca ściągnięty obiekt.
         """
-        return self.list_of_items.pop(0)
+        removed = self.list_of_items.pop(0)
+        return removed
 
     def is_empty(self):
         """
@@ -29,7 +30,10 @@ class QueueBaB(object):
         Nie pobiera argumentów.
         Zwraca True jeśli kolejka jest pusta lub False gdy nie jest.
         """
-        return self.list_of_items == []
+        if len(self.list_of_items) == 0:
+            return True
+        else:
+            return False
 
     def size(self):
         """
@@ -55,7 +59,7 @@ class QueueBaE(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items = [item] + self.list_of_items
+        self.list_of_items.insert(0, item)
 
     def dequeue(self):
         """
@@ -63,7 +67,8 @@ class QueueBaE(object):
         Nie pobiera argumentów.
         Zwraca ściągnięty obiekt.
         """
-        return self.list_of_items.pop()
+        removed = self.list_of_items.pop()
+        return removed
 
     def is_empty(self):
         """
@@ -71,7 +76,10 @@ class QueueBaE(object):
         Nie pobiera argumentów.
         Zwraca True jeśli kolejka jest pusta lub False gdy nie jest.
         """
-        return self.list_of_items == []
+        if len(self.list_of_items) == 0:
+            return True
+        else:
+            return False
 
     def size(self):
         """
@@ -83,19 +91,19 @@ class QueueBaE(object):
 
 
 if __name__ == "__main__":
-    a = QueueBaB()
-    a.enqueue(22)
-    a.enqueue(23)
-    a.enqueue(2)
-    a.enqueue(4)
-    a.enqueue('dog')
-    a.enqueue(True)
-    print(a.dequeue())
-    q = QueueBaE()
-    q.enqueue(22)
-    q.enqueue(23)
-    q.enqueue(2)
-    q.enqueue(4)
-    q.enqueue('dog')
-    q.enqueue(True)
-    print(q.dequeue())
+    bae = QueueBaE()
+    bae.enqueue(1)
+    bae.enqueue(2)
+    bae.enqueue(3)
+    bae.enqueue(4)
+    bae.enqueue(5)
+    print(bae.dequeue())
+    bae.enqueue(100)
+    bab = QueueBaB()
+    bab.enqueue(1)
+    bab.enqueue(2)
+    bab.enqueue(3)
+    bab.enqueue(4)
+    bab.enqueue(5)
+    print(bab.dequeue())
+    bab.enqueue(100)
