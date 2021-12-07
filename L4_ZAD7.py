@@ -16,11 +16,13 @@ class Node:
     def set_next(self, new_next):
         self.next = new_next
 
+
 class UnorderedList(object):
     """
     Tutaj, skopiuj swoją implementację klasy UnorderedList,
     wykonaną jako rezultat Zadania 5.
     """
+
     def __init__(self):
         self.head = None
 
@@ -68,6 +70,11 @@ class UnorderedList(object):
             previous.set_next(current.get_next())
 
     def remove_2(self, item, start_place):
+        """
+        Funkcja która usuwa wybrany element, ale szuka od wskazanego miejsca
+        Argument item - element
+        Argument start_place - początkowe miejsce szukania
+        """
         current = self.head
         previous = None
         found = False
@@ -118,11 +125,12 @@ class UnorderedList(object):
         """
         current = self.head
         ind = 0
-        while current.get_data() != item:
-            ind += 1
-            current = current.get_next()
-        else:
-            return ind
+        while current != None:
+            if current.get_data() != item:
+                ind += 1
+                current = current.get_next()
+            else:
+                return ind
 
     def insert(self, pos, item):
         """
@@ -135,14 +143,20 @@ class UnorderedList(object):
         na zadanej pozycji (np. na 5. miejsce w 3-elementowej liście).
         """
         current = self.head
-        for i in range(1, pos):
-            current = current.get_next()
-            # if current.get_next() == current:
-            # return IndexError
-        new_item = Node(item)
-        next = current.get_next()
-        current.set_next(new_item)
-        new_item.set_next(next)
+        length = self.size()
+        if pos > length:
+            raise IndexError("ERROR")
+        if pos == 0:
+            self.add(item)
+        else:
+            for i in range(0, pos - 1):
+                current = current.get_next()
+                if current.get_next() == current:
+                    return IndexError
+            new_item = Node(item)
+            next = current.get_next()
+            current.set_next(new_item)
+            new_item.set_next(next)
 
     def pop(self, pos=-1):
         """
@@ -173,6 +187,7 @@ class UnorderedList(object):
                 current = current.get_next()
             to_remove = current.get_data()
             self.remove_2(to_remove, pos)
+            return to_remove
 
     def __str__(self):
         current = self.head
@@ -220,7 +235,10 @@ class DequeueUsingUL(object):
         Zwraca usuwany element.
         W przypadku pustej kolejku rzuca wyjątkiem IndexError
         """
-        return self.items.pop(0)
+        if self.items.is_empty():
+            raise IndexError
+        else:
+            return self.items.pop(0)
 
     def remove_right(self):
         """
@@ -229,7 +247,10 @@ class DequeueUsingUL(object):
         Zwraca usuwany element.
         W przypadku pustej kolejku rzuca wyjątkiem IndexError
         """
-        return self.items.pop()
+        if self.items.is_empty():
+            raise IndexError
+        else:
+            return self.items.pop()
 
     def size(self):
         """
@@ -248,10 +269,9 @@ class DequeueUsingUL(object):
         s = ("elements in the list are [" + ', '.join(['{}'] * len(li)) + "]")
         return s.format(*li)
 
+
 if __name__ == "__main__":
     mylist = DequeueUsingUL()
-    mylist.add_right(4)
-    mylist.add_left(3)
     print(mylist)
-    mylist.remove_right()
+    mylist.remove_left()
     print(mylist)
