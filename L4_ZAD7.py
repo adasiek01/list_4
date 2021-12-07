@@ -273,5 +273,7 @@ class DequeueUsingUL(object):
 if __name__ == "__main__":
     mylist = DequeueUsingUL()
     print(mylist)
-    mylist.remove_left()
+    mylist.add_left(4)
+    mylist.add_right(6)
+    mylist.add_left(10)
     print(mylist)
