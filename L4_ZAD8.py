@@ -89,6 +89,12 @@ class UnorderedList:
 
 
 def bi_list(a, n):
+    """
+    Funkcja porównuje czas wykonanych operacji dla implementacji
+    Argument n - ilość operacji
+    Argument a - lista wbudowana
+    Zwraca ten czas * 10 dla czytelniejszego wykresu
+    """
     start_a = time.time()
     for i in range(0, n):
         a.append(20)
@@ -103,6 +109,12 @@ def bi_list(a, n):
 
 
 def uo_list(b, n):
+    """
+    Funkcja porównuje czas wykonanych operacji dla implementacji
+    Argument n - ilość operacji
+    Argument b - lista jednokierunkowa
+    Zwraca ten czas
+    """
     start_b = time.time()
     for i in range(0, n):
         b.add(20)
