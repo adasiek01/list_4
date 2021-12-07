@@ -13,6 +13,7 @@ Przy pomocy poniższej symulacji obliczymy średni czas oczekiwania w kolejce.
 
 import random
 
+
 class Queue:
     def __init__(self):
         self.items = []
@@ -21,7 +22,8 @@ class Queue:
         return self.items == []
 
     def enqueue(self, item):
-        self.items.insert(0,item)
+        self.items.insert(0,
+                          item)
 
     def dequeue(self):
         return self.items.pop()
@@ -91,5 +93,7 @@ def milk_bar_simulation(minutes, probability):
 
         milk_bar.tick()
     print("averge waiting time: {}minutes".format(total_time/clients_quantity))
+
+
 if __name__ == "__main__":
     milk_bar_simulation(30, 0.2)
