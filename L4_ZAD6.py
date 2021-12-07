@@ -70,6 +70,11 @@ class UnorderedList(object):
             previous.set_next(current.get_next())
 
     def remove_2(self, item, start_place):
+        """
+        Funkcja która usuwa wybrany element, ale szuka od wskazanego miejsca
+        Argument item - element
+        Argument start_place - początkowe miejsce szukania
+        """
         current = self.head
         previous = None
         found = False
@@ -120,11 +125,12 @@ class UnorderedList(object):
         """
         current = self.head
         ind = 0
-        while current.get_data() != item:
-            ind += 1
-            current = current.get_next()
-        else:
-            return ind
+        while current != None:
+            if current.get_data() != item:
+                ind += 1
+                current = current.get_next()
+            else:
+                return ind
 
     def insert(self, pos, item):
         """
@@ -137,14 +143,20 @@ class UnorderedList(object):
         na zadanej pozycji (np. na 5. miejsce w 3-elementowej liście).
         """
         current = self.head
-        for i in range(1, pos):
-            current = current.get_next()
-            # if current.get_next() == current:
-            # return IndexError
-        new_item = Node(item)
-        next = current.get_next()
-        current.set_next(new_item)
-        new_item.set_next(next)
+        length = self.size()
+        if pos > length:
+            raise IndexError("ERROR")
+        if pos == 0:
+            self.add(item)
+        else:
+            for i in range(0, pos - 1):
+                current = current.get_next()
+                if current.get_next() == current:
+                    return IndexError
+            new_item = Node(item)
+            next = current.get_next()
+            current.set_next(new_item)
+            new_item.set_next(next)
 
     def pop(self, pos=-1):
         """
@@ -175,6 +187,7 @@ class UnorderedList(object):
                 current = current.get_next()
             to_remove = current.get_data()
             self.remove_2(to_remove, pos)
+            return to_remove
 
     def __str__(self):
         current = self.head
@@ -206,7 +219,6 @@ class StackUsingUL(object):
         """
         self.items.append(item)
 
-
     def pop(self):
         """
         Metoda ściąga element ze stosu.
@@ -214,7 +226,10 @@ class StackUsingUL(object):
         Zwraca ściągnięty element.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        self.items.pop()
+        if self.items.is_empty():
+            raise IndexError("This stack is empty")
+        else:
+            return self.items.pop()
 
     def peek(self):
         """
@@ -224,10 +239,13 @@ class StackUsingUL(object):
         Zwraca wierzchni element stosu.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        current = self.items.head
-        while current.get_next() != None:
-            current = current.get_next()
-        return current.get_data()
+        if self.items.is_empty():
+            raise IndexError("This stack is empty")
+        else:
+            current = self.items.head
+            while current.get_next() != None:
+                current = current.get_next()
+            return current.get_data()
 
     def size(self):
         """
