@@ -6,42 +6,504 @@ import matplotlib.pyplot as plt
 from L4_ZAD1 import QueueBaB, QueueBaE
 
 
-def comparing(q, item):
+def comparing(n):
+    bab = QueueBaB()
+    bae = QueueBaE()
     start_a = time.time()
-    for i in range(1, 5000):
-        q.enqueue(item)
-    for i in range(1, 2500):
-        q.dequeue()
+    for i in range(1, n):
+        bab.enqueue(20)
+    for i in range(1, n):
+        bab.dequeue()
     end_a = time.time()
     start_b = time.time()
-    for i in range(1, 20000):
-        q.enqueue(item)
-    for i in range(1, 10000):
-        q.dequeue()
+    for i in range(1, n):
+        bae.enqueue(20)
+    for i in range(1, n):
+        bae.dequeue()
     end_b = time.time()
-    start_c = time.time()
-    for i in range(1, 10000):
-        q.enqueue(item)
-    for i in range(1, 5000):
-        q.dequeue()
-    end_c = time.time()
-    time_a = end_a - start_a
-    time_b = end_b - start_b
-    time_c = end_c - start_c
-    return time_a, time_b, time_c
+    time_bab = end_a - start_a
+    time_bae = end_b - start_b
+    return time_bab, time_bae
 
 
-bab = comparing(QueueBaB(), 333)
-bae = comparing(QueueBaE(), 333)
-
-if __name__ == "__main__":
-    print(bab)
-    print(bae)
-
-x = [5000, 10000, 20000]
-plt.plot(x, bab)
-plt.plot(x, bae)
+x = [5000, 7500, 10000]
+list_bab = [comparing(5000)[0], comparing(7500)[0], comparing(10000)[0]]
+list_bae = [comparing(5000)[1], comparing(7500)[1], comparing(10000)[1]]
+plt.plot(x, list_bab)
+plt.plot(x, list_bae)
 plt.title("comparison")
 plt.xlabel("steps")
 plt.ylabel("time")
+plt.legend(["bab", "bae"])
 plt.show()
+
+if __name__ == "__main__":
+    print(list_bab, list_bae)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
